@@ -1,0 +1,5 @@
+---
+- version: v1alpha1
+  group: samina.fu.com
+  kind: MyTest
+  chart: /opt/helm/helm-charts/mytest
