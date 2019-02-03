@@ -2,5 +2,5 @@
 - version: v1alpha1
   group: samina.fu.com
   kind: MyTest
-  chart: ./helm-charts/mytest/
-  #chart: /opt/helm/helm-charts/mytest
+  #chart: ~/helm-charts/mytest
+  chart: /opt/helm/helm-charts/mytest
