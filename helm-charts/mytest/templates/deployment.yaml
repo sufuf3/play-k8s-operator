@@ -2,39 +2,29 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "mytest.fullname" . }}
+  namespace: {{ .Values.nameSpace }}
   labels:
-    app.kubernetes.io/name: {{ include "mytest.name" . }}
-    helm.sh/chart: {{ include "mytest.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app: {{ include "mytest.name" . }}
+  annotations:
+    samina.fu.com/username: {{ .Values.username }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "mytest.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
+      app: {{ include "mytest.name" . }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "mytest.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
+        app: {{ include "mytest.name" . }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ .Values.containerName }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8888
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
