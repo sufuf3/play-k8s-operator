@@ -2,6 +2,7 @@ apiVersion: samina.fu.com/v1alpha1
 kind: MyTest
 metadata:
   name: example-mytest
+  namespace: mytest-ns
 spec:
   # Default values copied from <project_dir>/helm-charts/mytest/values.yaml
   
@@ -11,17 +12,22 @@ spec:
   
   replicaCount: 1
   
+  username: sufuf3
+  containerName: itridnn
+  nameSpace: mynamespace
+
   image:
-    repository: nginx
-    tag: stable
+    repository: tensorflow/tensorflow
+    tag: latest-jupyter
     pullPolicy: IfNotPresent
   
   nameOverride: ""
   fullnameOverride: ""
   
   service:
-    type: ClusterIP
-    port: 80
+    type: NodePort
+    port: 8888
+    nodeport: 30566
   
   ingress:
     enabled: false
