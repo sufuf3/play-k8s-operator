@@ -1,0 +1,116 @@
+[debug] Created tunnel using local port: '41241'
+
+[debug] SERVER: "127.0.0.1:41241"
+
+[debug] Original chart version: ""
+[debug] CHART PATH: /home/vagrant/go/src/github.com/sufuf3/play-k8s-operator/helm-charts/mytest
+
+NAME:   ggggg
+REVISION: 1
+RELEASED: Sun Feb  3 17:33:39 2019
+CHART: mytest-0.1.0
+USER-SUPPLIED VALUES:
+{}
+
+COMPUTED VALUES:
+affinity: {}
+containerName: itridnn
+fullnameOverride: ""
+image:
+  pullPolicy: IfNotPresent
+  repository: tensorflow/tensorflow
+  tag: latest-jupyter
+ingress:
+  annotations: {}
+  enabled: false
+  hosts:
+  - chart-example.local
+  paths: []
+  tls: []
+nameOverride: ""
+nameSpace: mynamespace
+nodeSelector: {}
+replicaCount: 1
+resources: {}
+service:
+  nodeport: 30566
+  port: 8888
+  type: NodePort
+tolerations: []
+username: sufuf3
+
+HOOKS:
+---
+# ggggg-mytest-test-connection
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "ggggg-mytest-test-connection"
+  labels:
+    app.kubernetes.io/name: mytest
+    helm.sh/chart: mytest-0.1.0
+    app.kubernetes.io/instance: ggggg
+    app.kubernetes.io/managed-by: Tiller
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args:  ['ggggg-mytest:8888']
+  restartPolicy: Never
+MANIFEST:
+
+---
+# Source: mytest/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: ggggg-mytest
+  namespace: mynamespace
+  labels:
+    app: mytest
+  annotations:
+    samina.fu.com/username: sufuf3
+spec:
+  type: NodePort
+  ports:
+    - port: 8888
+      nodePort: 30566
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: mytest
+---
+# Source: mytest/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ggggg-mytest
+  namespace: mynamespace
+  labels:
+    app: mytest
+  annotations:
+    samina.fu.com/username: sufuf3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mytest
+  template:
+    metadata:
+      labels:
+        app: mytest
+    spec:
+      containers:
+        - name: itridnn
+          image: "tensorflow/tensorflow:latest-jupyter"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8888
+              protocol: TCP
+          resources:
+            {}
