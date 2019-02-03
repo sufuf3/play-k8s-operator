@@ -1,0 +1,16 @@
+# https://kubernetes.io/docs/setup/independent/control-plane-flags/
+# https://v1-12.docs.kubernetes.io/docs/setup/independent/control-plane-flags/
+apiVersion: kubeadm.k8s.io/v1alpha3
+kind: ClusterConfiguration
+kubernetesVersion: v1.12.4
+metadata:
+  name: 1.12.4-sample
+apiServerExtraArgs:
+  advertise-address: 172.17.8.100
+  runtime-config: "api/all=true"
+controllerManagerExtraArgs:
+  horizontal-pod-autoscaler-use-rest-clients: "true"
+  horizontal-pod-autoscaler-sync-period: "10s"
+  node-monitor-grace-period: "10s"
+networking:
+  podSubnet: 10.244.0.0/16
