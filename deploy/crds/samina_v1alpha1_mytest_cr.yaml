@@ -2,7 +2,7 @@ apiVersion: samina.fu.com/v1alpha1
 kind: MyTest
 metadata:
   name: example-mytest
-  namespace: mytest-ns
+  namespace: default
 spec:
   # Default values copied from <project_dir>/helm-charts/mytest/values.yaml
 
@@ -12,7 +12,7 @@ spec:
   replicaCount: 1
   username: sufuf3
   containerName: mycontainer
-  nameSpace: mytest-ns
+  nameSpace: default
   image:
     repository: tensorflow/tensorflow
     tag: latest-jupyter
@@ -25,13 +25,13 @@ spec:
     nodeport: 30567
   ingress:
     enabled: false
-     annotations: {}
-      # kubernetes.io/ingress.class: nginx
-      # kubernetes.io/tls-acme: "true"
-     paths: []
-     hosts:
-       - chart-example.local
-     tls: []
+    annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+    paths: []
+    hosts:
+      - chart-example.local
+    tls: []
     #  - secretName: chart-example-tls
     #    hosts:
     #      - chart-example.local
