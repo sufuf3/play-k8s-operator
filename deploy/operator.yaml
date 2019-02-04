@@ -16,7 +16,7 @@ spec:
       containers:
         - name: play-k8s-operator
           # Replace this with the built image name
-          image: REPLACE_IMAGE
+          image: sufuf3/my-operator-test:latest
           ports:
           - containerPort: 60000
             name: metrics
