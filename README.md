@@ -1,5 +1,8 @@
 # play-k8s-operator
 
+[![](https://img.shields.io/docker/pulls/sufuf3/my-operator-test.svg?style=flat)](https://cloud.docker.com/u/sufuf3/repository/docker/sufuf3/my-operator-test)
+[![](https://images.microbadger.com/badges/version/sufuf3/my-operator-test.svg)](https://cloud.docker.com/u/sufuf3/repository/docker/sufuf3/my-operator-test)
+
 Play with [operator-sdk](https://github.com/operator-framework/operator-sdk) to generate a Helm-based operator.
 
 ## Setup the Project play-k8s-operator Flow
