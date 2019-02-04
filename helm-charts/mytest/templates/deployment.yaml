@@ -5,6 +5,10 @@ metadata:
   namespace: {{ .Values.nameSpace }}
   labels:
     app: {{ include "mytest.name" . }}
+    app.kubernetes.io/name: {{ include "mytest.name" . }}
+    helm.sh/chart: {{ include "mytest.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
   annotations:
     samina.fu.com/username: {{ .Values.username }}
 spec:
@@ -16,6 +20,8 @@ spec:
     metadata:
       labels:
         app: {{ include "mytest.name" . }}
+        app.kubernetes.io/name: {{ include "mytest.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
         - name: {{ .Values.containerName }}
