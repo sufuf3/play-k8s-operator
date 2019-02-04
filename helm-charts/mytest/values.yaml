@@ -6,7 +6,7 @@ replicaCount: 1
 
 username: sufuf3
 containerName: itridnn
-nameSpace: mynamespace
+nameSpace: mytest-ns
 
 image:
   repository: tensorflow/tensorflow
